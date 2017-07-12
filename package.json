@@ -1,0 +1,17 @@
+{
+  "name": "cwds-samples",
+  "description": "Crowdsourcing API Extensions Samples",
+  "version": "1.0.0",
+  "scripts": {},
+  "main": "./js/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wchang28/cwds-samples.git"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.36",
+    "@types/node": "^6.0.81",
+    "crowdsourcing-api": "https://github.com/wchang28/crowdsourcing-api.git",
+    "express": "^4.15.3"
+  }
+}
