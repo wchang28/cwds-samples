@@ -5,7 +5,7 @@ import {Router as smartystreetRouter} from "./smartystreet";
 export function init(router: express.Router) {
     router.get("/hi", (req: express.Request, res: express.Response) => {
         //setTimeout(() => {res.jsonp({msg: "Hi from samples great!"});}, 30000);
-        res.jsonp({msg: "Hi from samples!"});
+        res.jsonp({msg: "Hi from samples!!!"});
     });
 
     router.get("/message", (req: express.Request, res: express.Response) => {
@@ -36,6 +36,7 @@ export function init(router: express.Router) {
     }
 
     router.get("/add-one-to-n", (req: express.Request, res: express.Response) => {
+        //console.log("1+2+3...+N");
         let rqd = getRequestData(req);
         res.jsonp({result: addOneToN(rqd.Query["n"])});
     });
@@ -51,7 +52,7 @@ export function init(router: express.Router) {
         let rqd = getRequestData(req);
         res.jsonp({result: NFactorial(rqd.Query["n"])});
     });
-
+    
     // create sub api branch called /smartystreet
     router.use("/smartystreet", smartystreetRouter);
 }
