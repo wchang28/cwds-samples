@@ -5,6 +5,9 @@ import {getRequestData, RESTReturn, IAuthorizedApiRoute} from "crowdsourcing-api
 let router = express.Router()
 export {router as Router};
 
+let auth_id = "{auth_id}";
+let auth_token= "{auth_token}";
+
 router.use("/", (req: express.Request, res: express.Response, next: express.NextFunction) => {
     let rqd = getRequestData(req);
     rqd.set("smartystreet_api", rqd.getRestApiRoute({instance_url: "https://api.smartystreets.com"}));
@@ -32,7 +35,7 @@ router.get("/query", (req: express.Request, res: express.Response) => {
             ,input_id: "59754256"
         }
     ];
-    samrtStreetApi.$J("POST", '/street-address?auth-id={auth-id}&auth-token={auth-token}', smartyQuery)
+    samrtStreetApi.$J("POST", '/street-address?auth-id=' + auth_id + '&auth-token=' + auth_token, smartyQuery)
     .then((ret: RESTReturn) => {
         let addressInfo = ret.data;
         res.jsonp(addressInfo);

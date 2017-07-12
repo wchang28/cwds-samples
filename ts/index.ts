@@ -39,8 +39,9 @@ export function init(router: express.Router) {
         return sum;
     }
 
-    router.get("/calc", (req: express.Request, res: express.Response) => {
-        res.jsonp({result: addOneToN(100)});
+    router.get("/add-one-to-n", (req: express.Request, res: express.Response) => {
+        let rqd = getRequestData(req);
+        res.jsonp({result: addOneToN(rqd.Query["n"])});
     })
 
     router.use("/smartystreet", smartystreetRouter);
