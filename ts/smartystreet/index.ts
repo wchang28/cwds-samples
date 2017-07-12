@@ -6,13 +6,7 @@ let router = express.Router()
 export {router as Router};
 
 let auth_id = "{auth_id}";
-let auth_token= "{auth_token}";
-
-router.use("/", (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    let rqd = getRequestData(req);
-    rqd.set("smartystreet_api", rqd.getRestApiRoute({instance_url: "https://api.smartystreets.com"}));
-    next();
-});
+let auth_token = "{auth_token}";
 
 interface SmartyStreetAddressQueryRow {
     street: string;
@@ -25,7 +19,7 @@ interface SmartyStreetAddressQueryRow {
 
 router.get("/query", (req: express.Request, res: express.Response) => {
     let rqd = getRequestData(req);
-    let samrtStreetApi:IAuthorizedApiRoute = rqd.get("smartystreet_api");
+    let samrytStreetApi:IAuthorizedApiRoute = rqd.getRestApiRoute({instance_url: "https://api.smartystreets.com"});
     let smartyQuery: SmartyStreetAddressQueryRow[] = [
         {
             street: "45 E 45th St"
@@ -35,7 +29,7 @@ router.get("/query", (req: express.Request, res: express.Response) => {
             ,input_id: "59754256"
         }
     ];
-    samrtStreetApi.$J("POST", '/street-address?auth-id=' + auth_id + '&auth-token=' + auth_token, smartyQuery)
+    samrytStreetApi.$J("POST", '/street-address?auth-id=' + auth_id + '&auth-token=' + auth_token, smartyQuery)
     .then((ret: RESTReturn) => {
         let addressInfo = ret.data;
         res.jsonp(addressInfo);
