@@ -32,5 +32,16 @@ export function init(router: express.Router) {
         });
     });
 
+    let addOneToN = (N: number) : number => {   // = 1 + 2 + 3 + ... + N
+        let sum = 0;
+        for (let i = 1; i <= N; i++)
+            sum += i;
+        return sum;
+    }
+
+    router.get("/calc", (req: express.Request, res: express.Response) => {
+        res.jsonp({result: addOneToN(10)});
+    })
+
     router.use("/smartystreet", smartystreetRouter);
 }
