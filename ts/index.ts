@@ -40,7 +40,7 @@ export function init(router: express.Router) {
     }
 
     router.get("/calc", (req: express.Request, res: express.Response) => {
-        res.jsonp({result: addOneToN(10)});
+        res.jsonp({result: addOneToN(100)});
     })
 
     router.use("/smartystreet", smartystreetRouter);
