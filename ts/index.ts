@@ -24,7 +24,7 @@ export function init(router: express.Router) {
 
     router.get("/howdy", middleware, (req: express.Request, res: express.Response) => {
         let rqd = getRequestData(req);
-        rqd.SelfApiRoute.$J("GET", "/services/samples/message", {})
+        rqd.SelfApiRoute.$J("GET", "/services/cwds-samples/message", {})
         .then((ret: RESTReturn) => {
             res.jsonp(ret.data.msg + rqd.get("happy_faces"));
         }).catch((err: any) => {
