@@ -8,7 +8,7 @@ export function init(router: express.Router) {
     });
 
     router.get("/long-ret", (req: express.Request, res: express.Response) => {
-        setTimeout(() => {res.jsonp({msg: "Hi from long return!"});}, 30000);
+        setTimeout(() => {res.jsonp({msg: "Hi from long return!"});}, 60000);
     });
 
     router.get("/message", (req: express.Request, res: express.Response) => {
