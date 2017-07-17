@@ -4,8 +4,11 @@ import {Router as smartystreetRouter} from "./smartystreet";
 
 export function init(router: express.Router) {
     router.get("/hi", (req: express.Request, res: express.Response) => {
-        //setTimeout(() => {res.jsonp({msg: "Hi from samples great!"});}, 30000);
         res.jsonp({msg: "Hi from samples!!!"});
+    });
+
+    router.get("/long-ret", (req: express.Request, res: express.Response) => {
+        setTimeout(() => {res.jsonp({msg: "Hi from long return!"});}, 30000);
     });
 
     router.get("/message", (req: express.Request, res: express.Response) => {
