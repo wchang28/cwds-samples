@@ -6,23 +6,43 @@ import * as expressMSSQL from "express-mssql";
 let router = express.Router()
 export {router as Router};
 
-let options: expressMSSQL.Options = {
-    configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "SFDC", options: {trustedConnection: true}})
+let options_1: expressMSSQL.Options = {
+    configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "TestDB", options: {trustedConnection: true}})
     ,msnodesqlv8: true
     ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {
         getRequestData(req).set("db_connection", conn);
     }
-    ,poolErrorCallback: (err: any) => {console.error("!!! pool error: " + JSON.stringify(err));}
 };
 
-router.use("/", expressMSSQL.get(options));
+router.use("/db-1", expressMSSQL.get(options_1));
 
-router.get("/query", (req: express.Request, res: express.Response) => {
+router.get("/db-1/query", (req: express.Request, res: express.Response) => {
     let rqd = getRequestData(req);
     let conn: expressMSSQL.ConnectionPool = rqd.get("db_connection");
-    conn.request().query("SELECT * FROM [dbo].[Account_Codes]")
+    conn.request().query("SELECT * FROM [dbo].[ids]")
     .then((result: expressMSSQL.IResult<any>) => {
-        res.status(500).json(result);
+        res.status(500).json(result.recordset);
+    }).catch((err: any) => {
+        res.status(500).json(err);
+    })
+});
+
+let options_2: expressMSSQL.Options = {
+    configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "QMarket", options: {trustedConnection: true}})
+    ,msnodesqlv8: true
+    ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {
+        getRequestData(req).set("db_connection", conn);
+    }
+};
+
+router.use("/db-2", expressMSSQL.get(options_2));
+
+router.get("/db-2/query", (req: express.Request, res: express.Response) => {
+    let rqd = getRequestData(req);
+    let conn: expressMSSQL.ConnectionPool = rqd.get("db_connection");
+    conn.request().query("SELECT * FROM [dbo].[BusinessDays]")
+    .then((result: expressMSSQL.IResult<any>) => {
+        res.status(500).json(result.recordset);
     }).catch((err: any) => {
         res.status(500).json(err);
     })
