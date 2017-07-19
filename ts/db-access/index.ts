@@ -6,7 +6,7 @@ import * as expressMSSQL from "express-mssql";
 let router = express.Router()
 export {router as Router};
 
-let options_1: expressMSSQL.Options = {
+let db_options_1: expressMSSQL.Options = {
     configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "TestDB", options: {trustedConnection: true}})
     ,msnodesqlv8: true
     ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {
@@ -14,7 +14,7 @@ let options_1: expressMSSQL.Options = {
     }
 };
 
-router.use("/db-1", expressMSSQL.get(options_1));
+router.use("/db-1", expressMSSQL.get(db_options_1));
 
 router.get("/db-1/query", (req: express.Request, res: express.Response) => {
     let rqd = getRequestData(req);
@@ -24,10 +24,10 @@ router.get("/db-1/query", (req: express.Request, res: express.Response) => {
         res.status(500).json(result.recordset);
     }).catch((err: any) => {
         res.status(500).json(err);
-    })
+    });
 });
 
-let options_2: expressMSSQL.Options = {
+let db_options_2: expressMSSQL.Options = {
     configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "QMarket", options: {trustedConnection: true}})
     ,msnodesqlv8: true
     ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {
@@ -35,7 +35,7 @@ let options_2: expressMSSQL.Options = {
     }
 };
 
-router.use("/db-2", expressMSSQL.get(options_2));
+router.use("/db-2", expressMSSQL.get(db_options_2));
 
 router.get("/db-2/query", (req: express.Request, res: express.Response) => {
     let rqd = getRequestData(req);
@@ -45,5 +45,5 @@ router.get("/db-2/query", (req: express.Request, res: express.Response) => {
         res.status(500).json(result.recordset);
     }).catch((err: any) => {
         res.status(500).json(err);
-    })
-})
+    });
+});
