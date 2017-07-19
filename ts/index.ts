@@ -1,6 +1,7 @@
 import * as express from "express";
 import {getRequestData, RESTReturn} from "crowdsourcing-api";
 import {Router as smartystreetRouter} from "./smartystreet";
+import {Router as dbAccessRouter} from "./db-access";
 
 export function init(router: express.Router) {
     router.get("/hi", (req: express.Request, res: express.Response) => {
@@ -56,6 +57,8 @@ export function init(router: express.Router) {
         res.jsonp({result: NFactorial(rqd.Query["n"])});
     });
     
+    router.use("/db-access", dbAccessRouter);
+
     // create sub api branch called /smartystreet
     router.use("/smartystreet", smartystreetRouter);
 }

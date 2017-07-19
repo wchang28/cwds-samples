@@ -12,6 +12,7 @@
     "@types/express": "^4.0.36",
     "@types/node": "^6.0.81",
     "crowdsourcing-api": "https://github.com/wchang28/crowdsourcing-api.git",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+	"express-mssql": "https://github.com/wchang28/express-mssql.git"
   }
 }
