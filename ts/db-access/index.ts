@@ -9,9 +9,7 @@ export {router as Router};
 let db_options_1: expressMSSQL.Options = {
     configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "TestDB", options: {trustedConnection: true}})
     ,msnodesqlv8: true
-    ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {
-        getRequestData(req).set("db_connection", conn);
-    }
+    ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {getRequestData(req).set("db_connection", conn);}
 };
 
 router.use("/db-1", expressMSSQL.get(db_options_1));
@@ -21,7 +19,7 @@ router.get("/db-1/query", (req: express.Request, res: express.Response) => {
     let conn: expressMSSQL.ConnectionPool = rqd.get("db_connection");
     conn.request().query("SELECT * FROM [dbo].[ids]")
     .then((result: expressMSSQL.IResult<any>) => {
-        res.status(500).json(result.recordset);
+        res.jsonp(result.recordset);
     }).catch((err: any) => {
         res.status(500).json(err);
     });
@@ -30,9 +28,7 @@ router.get("/db-1/query", (req: express.Request, res: express.Response) => {
 let db_options_2: expressMSSQL.Options = {
     configSrc: (req: express.Request) => ({server: "AWS-PRD-SQL01", database: "QMarket", options: {trustedConnection: true}})
     ,msnodesqlv8: true
-    ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {
-        getRequestData(req).set("db_connection", conn);
-    }
+    ,connectedPoolCallback: (req: express.Request, conn: expressMSSQL.ConnectionPool) => {getRequestData(req).set("db_connection", conn);}
 };
 
 router.use("/db-2", expressMSSQL.get(db_options_2));
@@ -42,7 +38,7 @@ router.get("/db-2/query", (req: express.Request, res: express.Response) => {
     let conn: expressMSSQL.ConnectionPool = rqd.get("db_connection");
     conn.request().query("SELECT * FROM [dbo].[BusinessDays]")
     .then((result: expressMSSQL.IResult<any>) => {
-        res.status(500).json(result.recordset);
+        res.jsonp(result.recordset);
     }).catch((err: any) => {
         res.status(500).json(err);
     });
