@@ -16,8 +16,7 @@ router.use("/db-1", expressMSSQL.get(db_options_1));
 
 router.get("/db-1/query", Endware((rqd: IRequestData) => {
     let conn = rqd.get<expressMSSQL.ConnectionPool>("db_connection");
-    return conn.request().query("SELECT * FROM [dbo].[ids]")
-    .then((result: expressMSSQL.IResult<any>) => result.recordset);
+    return conn.request().query("SELECT * FROM [dbo].[ids]").then((result: expressMSSQL.IResult<any>) => result.recordset);
 }));
 
 let db_options_2: expressMSSQL.Options = {
@@ -30,6 +29,5 @@ router.use("/db-2", expressMSSQL.get(db_options_2));
 
 router.get("/db-2/query", Endware((rqd: IRequestData) => {
     let conn = rqd.get<expressMSSQL.ConnectionPool>("db_connection");
-    return conn.request().query("SELECT * FROM [dbo].[BusinessDays]")
-    .then((result: expressMSSQL.IResult<any>) => result.recordset);
+    return conn.request().query("SELECT * FROM [dbo].[BusinessDays]").then((result: expressMSSQL.IResult<any>) => result.recordset);
 }));
