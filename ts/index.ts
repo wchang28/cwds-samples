@@ -43,8 +43,9 @@ export function init(router: express.Router) {
 
     router.get("/n-factorial", Endware((rqd: IRequestData) => Promise.resolve({result: NFactorial(rqd.Query["n"])})));
 
+    // create sub api branch called /db-access to demostrate database access
     router.use("/db-access", dbAccessRouter);
 
-    // create sub api branch called /smartystreet
+    // create sub api branch called /smartystreet to demostrate external REST api call
     router.use("/smartystreet", smartystreetRouter);
 }
