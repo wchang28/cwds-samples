@@ -6,3 +6,4 @@ let router = express.Router()
 export {router as Router};
 
 router.get("/curl-example", CGIEndware("text/html", (rqd: IRequestData) => rqd.CGIChildProcessLauncher.exec("curl https://www.google.com")));
+//router.get("/curl-example", CGIEndware("text/html", (rqd: IRequestData) => rqd.CGIChildProcessLauncher.exec("curl https://www.yahoo.com")));
