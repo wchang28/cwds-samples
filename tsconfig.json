@@ -14,6 +14,7 @@
       ]
   },
   "files": [
-    "./ts/index.ts"
+    "./ts/index.ts",
+    "./ts/cgi/node/test.ts"
   ]
 }
