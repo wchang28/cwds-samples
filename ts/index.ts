@@ -2,6 +2,7 @@ import * as express from "express";
 import {getRequestData, RESTReturn, IRequestData, JSONEndware, ResourceMiddleware} from "crowdsourcing-api";
 import {Router as smartystreetRouter} from "./smartystreet";
 import {Router as dbAccessRouter} from "./db-access";
+import {Router as cgiRouter} from "./cgi";
 
 export function init(router: express.Router) {
     router.get("/hi", (req: express.Request, res: express.Response) => {
@@ -42,6 +43,9 @@ export function init(router: express.Router) {
     }
 
     router.get("/n-factorial", JSONEndware((rqd: IRequestData) => Promise.resolve({result: NFactorial(rqd.Query["n"])})));
+
+    // create sub api branch called /cgi to demostrate CGI
+    router.use("/cgi", cgiRouter);
 
     // create sub api branch called /db-access to demostrate database access
     router.use("/db-access", dbAccessRouter);
