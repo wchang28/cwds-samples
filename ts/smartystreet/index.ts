@@ -18,7 +18,7 @@ interface SmartyStreetAddressQueryRow {
 }
 
 router.get("/query", JSONEndware((rqd: IRequestData) => {
-    let samrytStreetApi: IAuthorizedApiRoute = rqd.getRestApiRoute({instance_url: "https://api.smartystreets.com"});
+    let samrtyStreetApi: IAuthorizedApiRoute = rqd.getRestApiRoute({instance_url: "https://api.smartystreets.com"});
     let smartyQuery: SmartyStreetAddressQueryRow[] = [
         {
             street: "45 E 45th St"
@@ -28,5 +28,5 @@ router.get("/query", JSONEndware((rqd: IRequestData) => {
             ,input_id: "59754256"
         }
     ];
-    return samrytStreetApi.$J("POST", '/street-address?auth-id=' + auth_id + '&auth-token=' + auth_token, smartyQuery).then((ret: RESTReturn) => ret.data);
+    return samrtyStreetApi.$J("POST", '/street-address?auth-id=' + auth_id + '&auth-token=' + auth_token, smartyQuery).then((ret: RESTReturn) => ret.data);
 }));
