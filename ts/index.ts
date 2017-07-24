@@ -1,5 +1,5 @@
 import * as express from "express";
-import {getRequestData, RESTReturn, IRequestData, Endware, ResourceMiddleware} from "crowdsourcing-api";
+import {getRequestData, RESTReturn, IRequestData, JSONEndware, ResourceMiddleware} from "crowdsourcing-api";
 import {Router as smartystreetRouter} from "./smartystreet";
 import {Router as dbAccessRouter} from "./db-access";
 
@@ -18,7 +18,7 @@ export function init(router: express.Router) {
 
     let middleware = ResourceMiddleware<any>((rqd: IRequestData) => Promise.resolve<string>(" :-) :-) :-)"), "happy_faces");
 
-    router.get("/howdy", middleware, Endware((rqd: IRequestData) => {
+    router.get("/howdy", middleware, JSONEndware((rqd: IRequestData) => {
         return rqd.SelfApiRoute.$J("GET", "/services/cwds-samples/message", {})
         .then((ret: RESTReturn) => {
             return {msg: ret.data.msg + rqd.get<string>("happy_faces")};
@@ -32,7 +32,7 @@ export function init(router: express.Router) {
         return sum;
     }
 
-    router.get("/add-one-to-n", Endware((rqd: IRequestData) => Promise.resolve({result: addOneToN(rqd.Query["n"])})));
+    router.get("/add-one-to-n", JSONEndware((rqd: IRequestData) => Promise.resolve({result: addOneToN(rqd.Query["n"])})));
 
     let NFactorial = (N: number) : number => { // = 1 * 2 * 3 * ... * N
         let product = 1;
@@ -41,7 +41,7 @@ export function init(router: express.Router) {
         return product;
     }
 
-    router.get("/n-factorial", Endware((rqd: IRequestData) => Promise.resolve({result: NFactorial(rqd.Query["n"])})));
+    router.get("/n-factorial", JSONEndware((rqd: IRequestData) => Promise.resolve({result: NFactorial(rqd.Query["n"])})));
 
     // create sub api branch called /db-access to demostrate database access
     router.use("/db-access", dbAccessRouter);

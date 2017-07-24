@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as core from 'express-serve-static-core';
-import {getRequestData, RESTReturn, IAuthorizedApiRoute, Endware, IRequestData} from "crowdsourcing-api";
+import {getRequestData, RESTReturn, IAuthorizedApiRoute, JSONEndware, IRequestData} from "crowdsourcing-api";
 
 let router = express.Router()
 export {router as Router};
@@ -17,7 +17,7 @@ interface SmartyStreetAddressQueryRow {
     candidates?: number;
 }
 
-router.get("/query", Endware((rqd: IRequestData) => {
+router.get("/query", JSONEndware((rqd: IRequestData) => {
     let samrytStreetApi: IAuthorizedApiRoute = rqd.getRestApiRoute({instance_url: "https://api.smartystreets.com"});
     let smartyQuery: SmartyStreetAddressQueryRow[] = [
         {
