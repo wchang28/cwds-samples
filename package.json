@@ -1,8 +1,11 @@
 {
   "name": "cwds-samples",
   "description": "Crowdsourcing API Extensions Samples",
-  "version": "1.0.0",
-  "scripts": {},
+  "version": "1.0.1",
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "grunt"
+  },
   "main": "./js/index.js",
   "repository": {
     "type": "git",
@@ -13,6 +16,11 @@
     "@types/node": "^6.0.81",
     "crowdsourcing-api": "https://github.com/wchang28/crowdsourcing-api.git",
     "express": "^4.15.3",
-	"express-mssql": "https://github.com/wchang28/express-mssql.git"
+    "express-mssql": "https://github.com/wchang28/express-mssql.git",
+    "typescript": "^2.5.2"
+  },
+  "devDependencies": {
+    "grunt-ts": "^6.0.0-beta.16",
+    "grunt": "^1.0.1"
   }
 }
